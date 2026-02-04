@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+body {
+  background-color: #000000;
+  margin: 0;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Opcional: Para una fuente más elegante */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap');
+.font-serif {
+  font-family: 'Playfair Display', serif;
+}
