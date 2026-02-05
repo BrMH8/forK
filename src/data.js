@@ -1,3 +1,5 @@
+import { i } from "framer-motion/client";
+
 export const songs = [
   {
     id: 1,
@@ -15,4 +17,12 @@ export const songs = [
     lrc: "/audio/amor-de-mis-amores.lrc",
     color: "from-yellow-400 to-red-500"
   },
+  {
+    id: 3,
+    title: "Beso",
+    artist: "Jósean Log",
+    src: "/audio/beso.mp3",
+    lrc: "/audio/beso.lrc",
+    color: "from-blue-500 to-teal-400"
+  }
 ];

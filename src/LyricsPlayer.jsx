@@ -4,6 +4,7 @@ import { songs } from './data';
 import { CiPause1, CiPlay1 } from "react-icons/ci";
 import { BiSkipNextCircle, BiSkipPreviousCircle, BiReset } from "react-icons/bi";
 import { TiThMenu } from "react-icons/ti";
+import NewTag from './NewTag';
 
 const LyricsPlayer = () => {
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
@@ -206,8 +207,14 @@ const LyricsPlayer = () => {
                       : 'hover:bg-white/5 opacity-60'
                     }`}
                   >
-                    <p className="font-bold text-sm md:text-base truncate">{song.title}</p>
-                    <p className="text-[10px] uppercase opacity-70">{song.artist}</p>
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <p className="font-bold text-sm md:text-base truncate">{song.title}</p>
+                        <p className="text-[10px] uppercase opacity-70">{song.artist}</p>
+                      </div>
+                      {/* Etiqueta 'New' para canciones nuevas */}
+                      {song.id === 3 && <NewTag />} {/* Cambia la condición según las nuevas canciones */}
+                    </div>
                   </button>
                 ))}
               </div>
