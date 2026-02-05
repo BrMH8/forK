@@ -137,8 +137,8 @@ const LyricsPlayer = () => {
           
           <div className="bg-gradient-to-br from-[#1a0a2e] via-[#121212] to-[#2d1b3d] p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border border-pink-500/20 shadow-2xl shadow-pink-500/10">
             <div className="text-center mb-4 md:mb-6">
-              <h3 className="font-bold text-lg md:text-xl truncate">{currentSong.title}</h3>
-              <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest">{currentSong.artist}</p>
+              <h3 className="font-bold text-lg md:text-xl truncate bg-gradient-to-r from-pink-400 via-purple-300 to-pink-400 bg-clip-text text-transparent">{currentSong.title}</h3>
+              <p className="text-[10px] md:text-xs text-pink-400/70 uppercase tracking-widest mt-2">{currentSong.artist}</p>
             </div>
 
             <div className="w-full h-[2px] bg-white/10 rounded-full mb-6 md:mb-8 overflow-hidden">
@@ -199,8 +199,8 @@ const LyricsPlayer = () => {
               className="fixed right-0 top-0 h-full w-[280px] md:w-[350px] bg-gradient-to-b from-purple-900/30 via-[#0a0a0a] to-pink-900/20 border-l border-pink-500/20 z-50 p-6 md:p-8 flex flex-col shadow-2xl shadow-pink-500/10"
             >
               <div className="flex justify-between items-center mb-8 md:mb-10">
-                <h2 className="text-sm md:text-lg font-bold tracking-tighter uppercase text-gray-400">Biblioteca para mi noviecita</h2>
-                <button onClick={() => setIsSidebarOpen(false)} className="text-xl md:text-2xl">✕</button>
+                <h2 className="text-sm md:text-lg font-bold tracking-tighter uppercase bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Biblioteca para mi noviecita</h2>
+                <button onClick={() => setIsSidebarOpen(false)} className="text-xl md:text-2xl text-pink-400 hover:text-pink-300">✕</button>
               </div>
               
               <div className="space-y-3 md:space-y-4 overflow-y-auto pr-2 custom-scrollbar">
@@ -216,8 +216,8 @@ const LyricsPlayer = () => {
                   >
                     <div className="flex justify-between items-center">
                       <div>
-                        <p className="font-bold text-sm md:text-base truncate">{song.title}</p>
-                        <p className="text-[10px] uppercase opacity-70">{song.artist}</p>
+                        <p className="font-bold text-sm md:text-base truncate text-white group-hover:text-pink-300">{song.title}</p>
+                        <p className="text-[10px] uppercase opacity-70 text-pink-300/60">{song.artist}</p>
                       </div>
                       {/* Etiqueta 'New' para canciones nuevas */}
                       {song.id === 3 && <NewTag />} {/* Cambia la condición según las nuevas canciones */}
