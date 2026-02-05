@@ -7,6 +7,20 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Animación de delay para el fondo */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
 /* Opcional: Para una fuente más elegante */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap');
 .font-serif {
