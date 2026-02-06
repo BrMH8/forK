@@ -26,3 +26,13 @@ body {
 .font-serif {
   font-family: 'Playfair Display', serif;
 }
+
+/* Oculta la mini scrollbar pero mantiene el scroll funcional en elementos con esta clase */
+.custom-scrollbar {
+  -ms-overflow-style: none; /* IE y Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.custom-scrollbar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}

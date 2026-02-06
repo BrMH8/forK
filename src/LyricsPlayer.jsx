@@ -220,7 +220,7 @@ const LyricsPlayer = () => {
                         <p className="text-[10px] uppercase opacity-70 text-pink-300/60">{song.artist}</p>
                       </div>
                       {/* Etiqueta 'New' para canciones nuevas */}
-                      {song.id === 3 && <NewTag />} {/* Cambia la condición según las nuevas canciones */}
+                      {song.id === 4 && <NewTag />} {/* Cambia la condición según las nuevas canciones */}
                     </div>
                   </button>
                 ))}

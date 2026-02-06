@@ -24,5 +24,13 @@ export const songs = [
     src: "/audio/beso.mp3",
     lrc: "/audio/beso.lrc",
     color: "from-blue-500 to-teal-400"
+  },
+  {
+    id: 4,
+    title: "Deja que salga la luna",
+    artist: "Pedro Infante",
+    src: "/audio/deja-que-salga-la-luna.mp3",
+    lrc: "/audio/deja-que-salga-la-luna.lrc",
+    color: "from-red-400 to-yellow-500"
   }
 ];
