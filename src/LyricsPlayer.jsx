@@ -5,6 +5,7 @@ import { CiPause1, CiPlay1 } from "react-icons/ci";
 import { BiSkipNextCircle, BiSkipPreviousCircle, BiReset } from "react-icons/bi";
 import { TiThMenu } from "react-icons/ti";
 import NewTag from './NewTag';
+import EspecialTag from './EspecialTag';
 
 const LyricsPlayer = () => {
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
@@ -17,12 +18,12 @@ const LyricsPlayer = () => {
 
   const currentSong = songs[currentSongIndex];
   
-  // Ajuste responsivo de altura de línea
-  const [lineHeight, setLineHeight] = useState(100);
+  // Ajuste responsivo de altura de línea (más espacio para líneas largas que hacen wrap)
+  const [lineHeight, setLineHeight] = useState(120);
 
   useEffect(() => {
     const handleResize = () => {
-      setLineHeight(window.innerWidth < 768 ? 70 : 100);
+      setLineHeight(window.innerWidth < 768 ? 90 : 120);
     };
     handleResize();
     window.addEventListener('resize', handleResize);
@@ -95,20 +96,20 @@ const LyricsPlayer = () => {
         <TiThMenu />
       </button>
 
-      <main className="flex-1 flex flex-col items-center justify-between py-8 md:justify-center bg-gradient-to-br from-purple-900/30 via-black to-pink-900/30 relative overflow-hidden">
+      <main className="flex-1 flex flex-col items-center min-h-0 py-4 sm:py-6 md:py-8 bg-gradient-to-br from-purple-900/30 via-black to-pink-900/30 relative overflow-hidden">
         {/* Efecto de fondo animado */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-600/10 rounded-full blur-3xl animate-pulse animation-delay-2000" />
         </div>
-        
-        {/* ÁREA DE LETRAS */}
-        <div className="relative h-[45vh] md:h-[500px] w-full max-w-5xl overflow-hidden flex flex-col items-center z-10 bg-transparent">
-          <div className="absolute top-0 w-full h-24 md:h-40 z-10 pointer-events-none" />
-          <div className="absolute bottom-0 w-full h-24 md:h-40 z-10 pointer-events-none" />
+
+        {/* ÁREA DE LETRAS - crece pero no empuja la card */}
+        <div className="relative flex-1 min-h-0 w-full max-w-5xl overflow-hidden flex flex-col items-center z-10 bg-transparent px-2 sm:px-4">
+          <div className="absolute top-0 w-full h-16 sm:h-20 md:h-28 z-10 pointer-events-none" />
+          <div className="absolute bottom-0 w-full h-16 sm:h-20 md:h-28 z-10 pointer-events-none" />
 
           <motion.div 
-            animate={{ y: -(activeIndex * lineHeight) + (window.innerWidth < 768 ? 140 : 200) }}
+            animate={{ y: -(activeIndex * lineHeight) + (window.innerWidth < 768 ? 100 : 160) }}
             transition={{ type: "spring", damping: 30, stiffness: 60 }}
             className="flex flex-col items-center w-full"
           >
@@ -122,8 +123,8 @@ const LyricsPlayer = () => {
                   textShadow: activeIndex === index ? "0 0 30px rgba(219, 39, 119, 0.8), 0 0 60px rgba(168, 85, 247, 0.6)" : "0 0 0px rgba(219, 39, 119, 0)",
                 }}
                 transition={{ type: "spring", damping: 25, stiffness: 80 }}
-                className="flex items-center justify-center text-3xl md:text-5xl lg:text-6xl font-serif italic text-center px-6 leading-tight bg-gradient-to-r from-pink-400 via-purple-300 to-pink-400 bg-clip-text text-transparent"
-                style={{ height: `${lineHeight}px` }}
+                className="flex items-center justify-center font-serif italic text-center px-3 sm:px-6 py-2 text-xl sm:text-2xl md:text-4xl lg:text-5xl leading-snug max-w-full break-words bg-gradient-to-r from-pink-400 via-purple-300 to-pink-400 bg-clip-text text-transparent"
+                style={{ height: `${lineHeight}px`, minHeight: `${lineHeight}px` }}
               >
                 {line.text}
               </motion.div>
@@ -131,17 +132,17 @@ const LyricsPlayer = () => {
           </motion.div>
         </div>
 
-        {/* CONTROLES */}
-        <div className="w-full max-w-[90%] md:max-w-sm px-4 z-30">
+        {/* CARD DE REPRODUCCIÓN - siempre visible, no se corta */}
+        <div className="w-full max-w-[min(92vw,28rem)] flex-shrink-0 px-3 sm:px-4 pb-4 sm:pb-6 md:pb-8 z-30">
           <audio ref={audioRef} src={currentSong.src} onTimeUpdate={handleTimeUpdate} onEnded={() => setIsPlaying(false)} />
-          
-          <div className="bg-gradient-to-br from-[#1a0a2e] via-[#121212] to-[#2d1b3d] p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border border-pink-500/20 shadow-2xl shadow-pink-500/10">
-            <div className="text-center mb-4 md:mb-6">
-              <h3 className="font-bold text-lg md:text-xl truncate bg-gradient-to-r from-pink-400 via-purple-300 to-pink-400 bg-clip-text text-transparent">{currentSong.title}</h3>
-              <p className="text-[10px] md:text-xs text-pink-400/70 uppercase tracking-widest mt-2">{currentSong.artist}</p>
+
+          <div className="bg-gradient-to-br from-[#1a0a2e] via-[#121212] to-[#2d1b3d] p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl md:rounded-[2.5rem] border border-pink-500/20 shadow-2xl shadow-pink-500/10">
+            <div className="text-center mb-3 sm:mb-4 md:mb-6">
+              <h3 className="font-bold text-base sm:text-lg md:text-xl truncate bg-gradient-to-r from-pink-400 via-purple-300 to-pink-400 bg-clip-text text-transparent px-1">{currentSong.title}</h3>
+              <p className="text-[10px] md:text-xs text-pink-400/70 uppercase tracking-widest mt-1.5 sm:mt-2">{currentSong.artist}</p>
             </div>
 
-            <div className="w-full h-[2px] bg-white/10 rounded-full mb-6 md:mb-8 overflow-hidden">
+            <div className="w-full h-[2px] bg-white/10 rounded-full mb-4 sm:mb-6 md:mb-8 overflow-hidden">
               <motion.div 
                 className={`h-full bg-gradient-to-r ${currentSong.color}`}
                 animate={{ width: `${progress}%` }} 
@@ -149,33 +150,33 @@ const LyricsPlayer = () => {
               />
             </div>
 
-            <div className="flex items-center justify-center gap-4 md:gap-6">
+            <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-6 flex-wrap">
               <button 
                 onClick={() => selectSong((currentSongIndex - 1 + songs.length) % songs.length)} 
-                className="text-2xl md:text-3xl text-pink-400 hover:text-pink-300 hover:drop-shadow-lg transition-all duration-300 active:scale-95"
+                className="text-xl sm:text-2xl md:text-3xl text-pink-400 hover:text-pink-300 hover:drop-shadow-lg transition-all duration-300 active:scale-95"
               >
                 <BiSkipPreviousCircle />
               </button>
-              
+
               <button 
                 onClick={togglePlay} 
-                className="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-pink-500 to-purple-600 text-white rounded-full flex items-center justify-center hover:scale-110 active:scale-95 transition-all shadow-lg shadow-pink-500/50 hover:shadow-pink-500/80"
+                className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-pink-500 to-purple-600 text-white rounded-full flex items-center justify-center hover:scale-110 active:scale-95 transition-all shadow-lg shadow-pink-500/50 hover:shadow-pink-500/80 flex-shrink-0"
               >
-                <span className="text-2xl md:text-3xl">
+                <span className="text-xl sm:text-2xl md:text-3xl">
                   {isPlaying ? <CiPause1 /> : <CiPlay1 />}
                 </span>
               </button>
 
               <button 
                 onClick={() => selectSong((currentSongIndex + 1) % songs.length)} 
-                className="text-2xl md:text-3xl text-pink-400 hover:text-pink-300 hover:drop-shadow-lg transition-all duration-300 active:scale-95"
+                className="text-xl sm:text-2xl md:text-3xl text-pink-400 hover:text-pink-300 hover:drop-shadow-lg transition-all duration-300 active:scale-95"
               >
                 <BiSkipNextCircle />
               </button>
 
               <button 
-                onClick={() => audioRef.current.currentTime = 0} 
-                className="text-xl md:text-2xl text-pink-400 hover:text-pink-300 hover:drop-shadow-lg transition-all duration-300 active:scale-95 ml-2"
+                onClick={() => { if (audioRef.current) audioRef.current.currentTime = 0; }} 
+                className="text-lg sm:text-xl md:text-2xl text-pink-400 hover:text-pink-300 hover:drop-shadow-lg transition-all duration-300 active:scale-95"
               >
                 <BiReset />
               </button>
@@ -214,13 +215,15 @@ const LyricsPlayer = () => {
                       : 'hover:bg-white/5 hover:border hover:border-pink-500/30 opacity-60'
                     }`}
                   >
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <p className="font-bold text-sm md:text-base truncate text-white group-hover:text-pink-300">{song.title}</p>
-                        <p className="text-[10px] uppercase opacity-70 text-pink-300/60">{song.artist}</p>
+                    <div className="flex flex-col gap-1">
+                      <div className="flex justify-between items-center">
+                        <div className="min-w-0 flex-1">
+                          <p className="font-bold text-sm md:text-base truncate text-white group-hover:text-pink-300">{song.title}</p>
+                          <p className="text-[10px] uppercase opacity-70 text-pink-300/60">{song.artist}</p>
+                        </div>
+                        {song.id === 5 && <NewTag />}
                       </div>
-                      {/* Etiqueta 'New' para canciones nuevas */}
-                      {song.id === 4 && <NewTag />} {/* Cambia la condición según las nuevas canciones */}
+                      {song.id === 6 && <EspecialTag />}
                     </div>
                   </button>
                 ))}
